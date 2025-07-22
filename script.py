@@ -94,35 +94,6 @@ html += """
 </html>
 """
 
-# Allow manual edits to timetable
-while True:
-    print("\nDo you want to:")
-    print("1. Add a class manually")
-    print("2. Remove a class manually")
-    print("3. Finish and generate timetable")
-    choice = input("Enter option (1/2/3): ").strip()
-
-    if choice == "1":
-        day = input("Day (e.g. Monday): ").strip()
-        slot = input("Time slot (exactly as shown, e.g. 9.00 - 9.50): ").strip()
-        code = input("Course code (e.g. CS303): ").strip()
-        room = input("Room (e.g. M6): ").strip()
-        formatted = f"{code}<br><small>({room})</small>"
-        grouped_data[day][slot].append(formatted)
-        print(f"✅ Added {code} at {slot} on {day}")
-
-    elif choice == "2":
-        day = input("Day (e.g. Monday): ").strip()
-        slot = input("Time slot (e.g. 9.00 - 9.50): ").strip()
-        code = input("Course code to remove (e.g. CS303): ").strip()
-        new_entries = [entry for entry in grouped_data[day][slot] if code not in entry]
-        grouped_data[day][slot] = new_entries
-        print(f"🗑️ Removed {code} from {slot} on {day}")
-
-    elif choice == "3":
-        break
-    else:
-        print("❌ Invalid option. Please enter 1, 2, or 3.")
 
 
 with open("my_timetable.html", "w", encoding="utf-8") as f:
